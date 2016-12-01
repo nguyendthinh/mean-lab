@@ -31,8 +31,26 @@ app.get("/", function(req, res){
 
 app.get("/:flavor", function(req, res){
   Sundae.findOne({flavor: req.params.flavor}).then(sundae => {
-    res.render("show", {sundae: sundae});
+    res.render("show", {sundae});
   });
+})
+
+app.post("/", function(req, res){
+  Sundae.create(req.body.sundae).then(sundae => {
+    res.redirect("/");
+  })
+})
+
+app.post("/:flavor", function(req, res){
+  Sundae.findOneAndUpdate({flavor: req.params.flavor}, req.body.sundae, {new: true}).then(function(sundae) {
+    res.redirect("/");
+  });
+})
+
+app.post("/:flavor/delete", function(req, res) {
+  Sundae.findOneAndRemove({flavor: req.params.flavor}).then(function() {
+    res.redirect("/");
+  })
 })
 
 app.listen(app.get("port"), () => {

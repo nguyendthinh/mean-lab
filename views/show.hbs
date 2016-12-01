@@ -1,4 +1,17 @@
 <h1>{{sundae.flavor}}</h1>
 <img src="{{sundae.photo}}" />
 <p>Ingredients: {{sundae.ingredients}}</p>
+
+<form action="/{{sundae.flavor}}" method="post">
+  <input type="text" name="sundae[flavor]" value="{{sundae.flavor}}">
+  <input type="text" name="sundae[ingredients]" value="{{sundae.ingredients}}">
+  <input type="text" name="sundae[photo]" value="{{sundae.photo}}">
+  <input type="submit">
+</form>
+
+<form action="/{{sundae.flavor}}/delete" method="post">
+  <button type="submit">Delete this flavor</button>
+</form>
+<br>
+
 <a href="/">Back to main page</a>
