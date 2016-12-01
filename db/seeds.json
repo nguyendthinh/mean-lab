@@ -1,0 +1,17 @@
+[
+  {
+    "flavor": "Vanilla",
+    "ingredients": "vanilla beans, milk",
+    "photo": "http://media.olivegarden.com/en_us/images/product/d-sundae-vanilla-kids-dpv.jpg"
+  },
+  {
+    "flavor": "Chococlate",
+    "ingredients": "Cacao and coco beans",
+    "photo": "http://www.lecremedelacrumb.com/wp-content/uploads/2014/01/cookie-dough-sundae-1.jpg"
+  },
+  {
+    "flavor": "Strawberry",
+    "ingredients": "strawberries and strawberries",
+    "photo": "http://1eeof942d990384ilm3qmi2k.wpengine.netdna-cdn.com/wp-content/uploads/7110-taylor2.jpg"
+  }
+]

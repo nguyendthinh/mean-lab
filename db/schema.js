@@ -1,16 +1,17 @@
 var mongoose = require('mongoose');
 
-var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId
+mongoose.Promise = global.Promise
+//
+// var Schema = mongoose.Schema,
+//     ObjectId = Schema.ObjectId
 
-var StudentSchema = new Schema ({
-  name: String
-})
+var SundaeSchema = new mongoose.Schema ({
+  flavor: String,
+  ingredients: String,
+  photo: String
+});
 
-var InstructorSchema = new Schema ({
-  name: String,
-  student: [StudentSchema]
-})
+mongoose.model("Sundae", SundaeSchema);
+mongoose.connect("mongodb://localhost/sundae");
 
-mongoose.model("Instructor", InstructorSchema)
-mongoose.model("Student", StudentSchema)
+module.exports = mongoose;
