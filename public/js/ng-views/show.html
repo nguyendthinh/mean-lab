@@ -1,0 +1,14 @@
+<h1>{{vm.sundae.flavor}}</h1>
+<img src="{{vm.sundae.photo}}" />
+<p>Ingredient: {{vm.sundae.ingredients}}</p>
+<h2>Update this Sundae</h2>
+<form>
+  <input type="text" ng-model="vm.sundae.flavor" value="{{vm.sundae.flavor}}" />
+  <input type="text" ng-model="vm.sundae.ingredients" value="{{vm.sundae.ingredient}}" />
+  <input type="text" ng-model="vm.sundae.photo" value="{{vm.sundae.photo}}" />
+  <button data-ng-click="vm.update()">Submit</button>
+</form>
+<br>
+<button data-ng-click="vm.destroy()">Delete this flavor</button>
+
+<h3><a data-ui-sref="index">Back to Listing</a></h3>

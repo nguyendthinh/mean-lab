@@ -17,41 +17,57 @@ app.engine(".hbs", hbs({
 }));
 
 app.use("/assets", express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 
 //
 // app.use(bodyParser.json());
 // app.use(express.static(__dirname + '/public'));
 
 app.get("/", function(req, res){
-  Sundae.find({}).then(sundaes => {
-    res.render("index", {sundaes});
-  });
+  res.render("sundaes");
 })
 
-app.get("/:flavor", function(req, res){
+app.get("/api/", function(req, res){
+  Sundae.find({}).then(function(sundaes){
+    res.json(sundaes);
+  });
+});
+
+app.get("/api/:flavor", function(req, res){
   Sundae.findOne({flavor: req.params.flavor}).then(sundae => {
-    res.render("show", {sundae});
+    res.json(sundae);
   });
 })
 
-app.post("/", function(req, res){
-  Sundae.create(req.body.sundae).then(sundae => {
-    res.redirect("/");
-  })
-})
+app.post("/api/", function(req, res){
+  Sundae.create(req.body).then(sundae => {
+    res.json(sundae)
+  });
+});
 
-app.post("/:flavor", function(req, res){
-  Sundae.findOneAndUpdate({flavor: req.params.flavor}, req.body.sundae, {new: true}).then(function(sundae) {
-    res.redirect("/");
+app.put("/api/:flavor", function(req, res){
+  Sundae.findOneAndUpdate({flavor: req.params.flavor}, req.body, {new: true}).then(function(sundae){
+    res.json(sundae);
   });
 })
 
-app.post("/:flavor/delete", function(req, res) {
-  Sundae.findOneAndRemove({flavor: req.params.flavor}).then(function() {
-    res.redirect("/");
+app.delete("/api/:flavor", function(req, res){
+  Sundae.findOneAndRemove({flavor: req.params.flavor}).then(function(){
+    res.json({success: true});
   })
 })
+
+// app.post("/:flavor", function(req, res){
+//   Sundae.findOneAndUpdate({flavor: req.params.flavor}, req.body.sundae, {new: true}).then(function(sundae) {
+//     res.redirect("/");
+//   });
+// })
+//
+// app.post("/:flavor/delete", function(req, res) {
+//   Sundae.findOneAndRemove({flavor: req.params.flavor}).then(function() {
+//     res.redirect("/");
+//   })
+// })
 
 app.listen(app.get("port"), () => {
   console.log("IT WORKS");
